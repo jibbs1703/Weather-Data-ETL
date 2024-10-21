@@ -1,12 +1,10 @@
-FROM apache/airflow:2.4.2
+FROM apache/airflow:2.10.2-python3.11
 
-RUN python -m pip install --upgrade pip
-RUN pip install python-dotenv
-RUN pip install boto3
-RUN pip install pandas
-RUN pip install pyyaml
+COPY requirements.txt /opt/airflow/
 
-# ALternatively Copy requirements.txt and Install its Contents.
-#RUN python -m pip install --upgrade pip
-#COPY requirements.txt requirements.txt
-#RUN pip install -r requirements.txt
+USER root
+RUN apt-get update && apt-get install -y gcc python3-dev
+
+USER airflow
+
+RUN pip install --no-cache-dir -r /opt/airflow/requirements.txt

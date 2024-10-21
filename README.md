@@ -56,11 +56,22 @@ cd Weather-Gas-ETL
   - Edit contents of the config.yaml file to suit the needs of your project
 
 
-- Build and Run Docker Container After Configuring Dockerfile and docker-compose.yaml:
+- Initialize Airflow Database:
+
 ```
-docker-compose up --build
+bash scripts/init.sh
+```
+
+- Run Container and Edit Files from Container Terminal (If not Interested in Using IDE):
+```
+bash scripts/startup.sh
 ```
 - Access Apache Airflow Tasks UI:
 
 When the container is built and running, Airflow can be accessed via http://localhost:8080. At this port, 
 you can monitor the ETL pipeline's progress, manage tasks and DAGS on the airflow UI. 
+
+- Stop Running Containers and Remove Volumes:
+```
+bash scripts/stop.sh
+```
